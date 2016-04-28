@@ -1,0 +1,74 @@
+﻿<Window x:Class="Labshell.ConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Labshell.View"
+        Title="ConfigWindow" Height="517" Width="814" AllowsTransparency="True" WindowStyle="None" MouseDown="MouseDownEventHandle" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="images/bg.png"/>
+    </Window.Background>
+    <Grid>
+        <Button x:Name="closeButton" HorizontalAlignment="Left" Height="21" Margin="790,5,0,0" VerticalAlignment="Top" Width="18" Style="{DynamicResource CloseWindowButton}" Click="CloseButton_Click"/>
+        <Button x:Name="minButton" Content="Button" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="18" Margin="767,5,0,0" Style="{DynamicResource MinButton}" Click="MinButton_Click"/>
+        <Grid HorizontalAlignment="Left" Height="314" Margin="113,80,0,0" VerticalAlignment="Top" Width="587">
+            <Grid.Background>
+                <ImageBrush ImageSource="images/main-bg.png"/>
+            </Grid.Background>
+            <Border x:Name="splitline" BorderBrush="#729B9B9B" BorderThickness="1" HorizontalAlignment="Left" Height="226" Margin="293,30,0,0" VerticalAlignment="Top" Width="1" Background="#729B9B9B" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.017"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Label Content="实验室" HorizontalAlignment="Left" Margin="33,25,0,0" VerticalAlignment="Top" Foreground="#FF4A4A4A" FontSize="15"/>
+            <Label Content="请选择设置您当前所在实验室" HorizontalAlignment="Left" Margin="33,46,0,0" VerticalAlignment="Top" Width="240" FontSize="10" RenderTransformOrigin="0.5,0.5" Foreground="#FFF7A621"/>
+            <ComboBox x:Name="labList" HorizontalAlignment="Left" Margin="38,71,0,0" VerticalAlignment="Top" Width="235" Style="{StaticResource DefaultComboBox}" local:ControlAttachProperty.Watermark="请选择实验室" FontSize="12" SelectionChanged="LabList_SelectionChanged"/>
+            <GroupBox Header="详细信息" HorizontalAlignment="Left" Margin="38,104,0,0" VerticalAlignment="Top" Height="152" Width="237" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF9B9B9B" Foreground="#FF9B9B9B">
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.409"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.493"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
+            </GroupBox>
+            <Label Content="实验室编号：" HorizontalAlignment="Left" Margin="42,127,0,0" VerticalAlignment="Top"/>
+            <Label Content="名称：" HorizontalAlignment="Left" Margin="42,157,0,0" VerticalAlignment="Top"/>
+            <Label Content="机器数量：" HorizontalAlignment="Left" Margin="42,187,0,0" VerticalAlignment="Top"/>
+            <Label Content="学生数量：" HorizontalAlignment="Left" Margin="42,217,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labNumber" Content="" HorizontalAlignment="Left" Margin="140,127,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
+            <Label x:Name="labName" Content="" HorizontalAlignment="Left" Margin="140,157,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B" MaxWidth="120"/>
+            <Label x:Name="studentNumber" Content="" HorizontalAlignment="Left" Margin="140,217,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
+            <Label x:Name="machineNumber" Content="" HorizontalAlignment="Left" Margin="140,187,0,0" VerticalAlignment="Top" Foreground="#FF9B9B9B"/>
+
+            <TextBox x:Name="pathText" Height="30" Margin="314,104,65,180" local:ControlAttachProperty.Watermark="选择实验软件启动路径" Style="{StaticResource DefaultTextBox}" IsReadOnly="True" Width="Auto"/>
+            <Label Content="软件目录设置" HorizontalAlignment="Left" Margin="310,25,0,0" VerticalAlignment="Top" Foreground="#FF4A4A4A" FontSize="15"/>
+            <Label Content="请设置已选实验相关软件目录" HorizontalAlignment="Left" Margin="310,46,0,0" VerticalAlignment="Top" Width="240" FontSize="10" RenderTransformOrigin="0.5,0.5" Foreground="#FFF7A621"/>
+            <Label Content="启动目录" HorizontalAlignment="Left" Margin="310,74,0,0" VerticalAlignment="Top" Foreground="#FF4A4A4A"/>
+            <Label Content="存盘目录" HorizontalAlignment="Left" Margin="310,139,0,0" VerticalAlignment="Top" Foreground="#FF4A4A4A"/>
+            <ListBox x:Name="pathList" HorizontalAlignment="Left" Height="90" Margin="314,164,0,0" VerticalAlignment="Top" Width="236" Style="{DynamicResource LSListBox}" ItemContainerStyle="{DynamicResource ListBoxItem}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Path}" Padding="10,0,0,0" Height="23" Width="190" FontSize="11" VerticalContentAlignment="Center" Foreground="#FF9B9B9B" ToolTip="{Binding Path}" Margin="0,0,10,0"/>
+                            <Button Tag="{Binding Path}" Padding="0,0,0,0" Height="15" Width="16" VerticalContentAlignment="Center" Click="RemoveButton_Click" Cursor="Hand" Style="{DynamicResource RemoveButton}" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Content="当前处于管理员模式，请谨慎操作" HorizontalAlignment="Left" Margin="35,269,0,0" VerticalAlignment="Top" Foreground="#FFFF0B0B"/>
+            <Button x:Name="exit" Content="退出" HorizontalAlignment="Left" Margin="385,269,0,0" VerticalAlignment="Top" Width="75" Height="25" Style="{DynamicResource MiddleButton}" Foreground="White" Click="ExitButton_Click"/>
+            <Button x:Name="save" Content="保存" HorizontalAlignment="Left" Margin="473,269,0,0" VerticalAlignment="Top" Width="75" Height="25" Style="{DynamicResource MiddleButton}" Foreground="White" Click="SaveButton_Click"/>
+            <Button x:Name="addPath" Content="Button" HorizontalAlignment="Left" Height="15" Margin="532,144,0,0" VerticalAlignment="Top" Width="16" Style="{DynamicResource AddButton}" Cursor="Hand" Click="OpenBrowser"/>
+            <Button x:Name="openFile" Content="Button" HorizontalAlignment="Left" Margin="527,110,0,0" VerticalAlignment="Top" Width="21" Height="19" Style="{DynamicResource OpenFileButton}" Click="OpenFile_Click"/>
+        </Grid>
+        <Label x:Name="videoInfo" Content="摄像头正常" HorizontalAlignment="Left" Margin="630,397,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="videoState" HorizontalAlignment="Left" Height="15" Margin="614,402,0,0" VerticalAlignment="Top" Width="16" Source="images/ic-good.png"/>
+        <Label x:Name="netInfo" Content="网络正常" HorizontalAlignment="Left" Margin="546,397,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="netState" HorizontalAlignment="Left" Height="15" Margin="530,402,0,0" VerticalAlignment="Top" Width="16" Source="images/ic-good.png"/>
+    </Grid>
+</Window>
